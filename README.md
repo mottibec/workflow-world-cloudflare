@@ -2,6 +2,8 @@
 
 A Cloudflare-native implementation of the [Vercel Workflow](https://useworkflow.dev/) Development Kit, providing durable, resumable async functions using Cloudflare's edge infrastructure.
 
+> **Note**: This is the initial project setup with core infrastructure components.
+
 ## Features
 
 - **Durable Workflows**: Execute long-running workflows that survive across process restarts
