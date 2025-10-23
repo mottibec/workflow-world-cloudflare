@@ -1,0 +1,37 @@
+{
+  "name": "workflow-world-cloudflare",
+  "version": "4.0.1-beta.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "tsc",
+    "clean": "tsc --build --clean",
+    "test": "vitest run src",
+    "typecheck": "tsc --noEmit",
+    "db:create": "wrangler d1 create workflow-db",
+    "db:migrate": "wrangler d1 migrations apply workflow-db",
+    "db:migrate:local": "wrangler d1 migrations apply workflow-db --local"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250110.0",
+    "@types/node": "24.6.2",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4",
+    "wrangler": "^3.102.0"
+  },
+  "dependencies": {
+    "@workflow/world": "4.0.1-beta.1",
+    "zod": "4.1.11"
+  }
+}

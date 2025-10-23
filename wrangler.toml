@@ -1,0 +1,46 @@
+name = "workflow-world-cloudflare"
+main = "src/index.ts"
+compatibility_date = "2025-01-24"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "workflow-db"
+database_id = "" # Will be filled after creating the database
+
+# R2 Buckets
+[[r2_buckets]]
+binding = "WORKFLOW_STORAGE"
+bucket_name = "workflow-storage"
+
+# KV Namespaces (for caching)
+[[kv_namespaces]]
+binding = "CACHE"
+id = "" # Will be filled after creating the namespace
+
+# Queues
+[[queues.producers]]
+binding = "QUEUE"
+queue = "workflow-queue"
+
+[[queues.consumers]]
+queue = "workflow-queue"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3
+dead_letter_queue = "workflow-dlq"
+
+# Durable Objects
+[[durable_objects.bindings]]
+name = "WORKFLOW_RUN"
+class_name = "WorkflowRunObject"
+script_name = "workflow-world-cloudflare"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["WorkflowRunObject"]
+
+# Environment Variables
+[vars]
+LARGE_DATA_THRESHOLD = "10240" # 10KB threshold for R2 storage
